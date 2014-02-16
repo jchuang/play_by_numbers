@@ -14,4 +14,9 @@ FactoryGirl.define do
     play
   end
 
+  factory :scene do
+    title 'On a balcony'
+    act
+  end
+
 end

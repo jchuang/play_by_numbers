@@ -11,5 +11,6 @@ describe Act do
   end
 
   it { should belong_to :play }
+  it { should have_many(:scenes).dependent(:destroy) }
 
 end

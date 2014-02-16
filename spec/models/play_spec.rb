@@ -9,7 +9,8 @@ describe Play do
     should validate_uniqueness_of(:title)
   end
 
-  it { should have_many(:acts).dependent(:destroy) }
   it { should have_many(:speakers).dependent(:destroy) }
+  it { should have_many(:acts).dependent(:destroy) }
+  it { should have_many(:scenes).through(:acts) }
 
 end
