@@ -15,10 +15,13 @@ play_title = @doc.xpath('/PLAY/TITLE').text
 Play.find_or_create_by!(title: play_title)
 play = Play.find_by(title: play_title)
 
-acts = @doc.xpath('//ACT/TITLE')
+acts = @doc.xpath('//ACT')
 acts.each do |act|
-  act_title = act.text
+  act_title = act.xpath('./TITLE').text
   Act.find_or_create_by!(title: act_title, play_id: play.id)
+
+  scenes = act.xpath('./SCENE')
+  puts "#{ act_title } contains #{ scenes.size } scenes."
 end
 
 speakers = @doc.xpath('//PERSONA')
