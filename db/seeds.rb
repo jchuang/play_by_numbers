@@ -12,3 +12,11 @@ require 'nokogiri'
 
 play_title = @doc.xpath('/PLAY/TITLE').text
 Play.find_or_create_by(title: play_title)
+play = Play.find_by(title: play_title)
+
+acts = @doc.xpath('//ACT/TITLE')
+acts.each do |act|
+  act_title = act.text
+  Act.find_or_create_by(title: act_title)
+  Act.play_id = play.id
+end
