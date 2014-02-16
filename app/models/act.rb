@@ -1,8 +1,7 @@
 class Act < ActiveRecord::Base
 
-  validates :title, presence: true
+  validates :title, presence: true, uniqueness: { scope: :play_id }
   validates :play, presence: true
-  validates :title, uniqueness: { scope: :play_id }
 
   belongs_to :play, inverse_of: :acts
 

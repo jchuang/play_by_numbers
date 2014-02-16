@@ -9,4 +9,9 @@ FactoryGirl.define do
     play
   end
 
+  factory :speaker do
+    name 'Romeo'
+    play
+  end
+
 end

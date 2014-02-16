@@ -15,8 +15,14 @@ play_title = @doc.xpath('/PLAY/TITLE').text
 Play.find_or_create_by!(title: play_title)
 play = Play.find_by(title: play_title)
 
-act_nodes = @doc.xpath('//ACT/TITLE')
-act_nodes.each do |act_node|
-  act_title = act_node.text
+acts = @doc.xpath('//ACT/TITLE')
+acts.each do |act|
+  act_title = act.text
   Act.find_or_create_by!(title: act_title, play_id: play.id)
+end
+
+speakers = @doc.xpath('//PERSONA')
+speakers.each do |speaker|
+  name = speaker.text
+  Speaker.find_or_create_by!(name: name, play_id: play.id)
 end

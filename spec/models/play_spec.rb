@@ -10,5 +10,6 @@ describe Play do
   end
 
   it { should have_many(:acts).dependent(:destroy) }
+  it { should have_many(:speakers).dependent(:destroy) }
 
 end
