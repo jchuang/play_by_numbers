@@ -18,7 +18,12 @@ play = Play.find_by(title: play_title)
 speakers = @doc.xpath('//PERSONA')
 speakers.each do |speaker|
   name = speaker.text
-  Speaker.find_or_create_by!(name: name, play_id: play.id)
+
+  if name == 'Young CATO'
+    Speaker.find_or_create_by!(name: 'CATO', play_id: play.id)
+  else
+    Speaker.find_or_create_by!(name: name, play_id: play.id)
+  end
 end
 
 Speech.delete_all
