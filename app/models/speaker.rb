@@ -4,5 +4,6 @@ class Speaker < ActiveRecord::Base
   validates :play, presence: true
 
   belongs_to :play, inverse_of: :acts
+  has_many :speeches, inverse_of: :speaker, dependent: :destroy
 
 end

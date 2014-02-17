@@ -35,5 +35,17 @@ act_nodes.each do |act_node|
     Scene.find_or_create_by!(title: scene_title, act_id: act.id)
     scene = Scene.find_by(title: scene_title, act_id: act.id)
 
+    speech_nodes = scene_node.xpath('./SPEECH')
+    speech_nodes.each do |speech_node|
+
+      speaker_name = speech_node.xpath('SPEAKER').text
+      unless speaker_name == 'All'
+
+        speaker = Speaker.find_by(name: speaker_name)
+        Speech.create!(speaker_id: speaker.id, scene_id: scene.id)
+        speech = Speech.last
+      end
+
+    end
   end
 end

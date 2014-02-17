@@ -19,4 +19,9 @@ FactoryGirl.define do
     act
   end
 
+  factory :speech do
+    speaker
+    scene
+  end
+
 end

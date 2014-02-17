@@ -11,5 +11,6 @@ describe Speaker do
   end
 
   it { should belong_to :play }
+  it { should have_many(:speeches).dependent(:destroy) }
 
 end
