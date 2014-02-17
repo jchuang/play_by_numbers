@@ -21,6 +21,8 @@ speakers.each do |speaker|
   Speaker.find_or_create_by!(name: name, play_id: play.id)
 end
 
+Speech.delete_all
+
 act_nodes = @doc.xpath('//ACT')
 act_nodes.each do |act_node|
 
@@ -39,11 +41,16 @@ act_nodes.each do |act_node|
     speech_nodes.each do |speech_node|
 
       speaker_name = speech_node.xpath('SPEAKER').text
-      unless speaker_name == 'All'
 
+      unless speaker_name == 'All'
         speaker = Speaker.find_by(name: speaker_name)
-        Speech.create!(speaker_id: speaker.id, scene_id: scene.id)
-        speech = Speech.last
+
+        if speaker.nil?
+          puts "Speaker name is #{ speaker_name }. There are currently #{ Speech.count } speeches."
+        else
+          speech = Speech.new(speaker_id: speaker.id, scene_id: scene.id)
+          speech.save!
+        end
       end
 
     end
