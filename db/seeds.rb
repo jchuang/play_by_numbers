@@ -9,13 +9,13 @@
 require 'nokogiri'
 require 'pry'
 
-@doc = Nokogiri::XML(File.open(Rails.root + 'db/data/julius_caesar.xml'))
+document = Nokogiri::XML(File.open(Rails.root + 'db/data/julius_caesar.xml'))
 
-play_title = @doc.xpath('/PLAY/TITLE').text
+play_title = document.xpath('/PLAY/TITLE').text
 Play.find_or_create_by!(title: play_title)
 play = Play.find_by(title: play_title)
 
-speakers = @doc.xpath('//PERSONA')
+speakers = document.xpath('//PERSONA')
 speakers.each do |speaker|
   name = speaker.text
 
@@ -28,7 +28,7 @@ end
 
 Speech.delete_all
 
-act_nodes = @doc.xpath('//ACT')
+act_nodes = document.xpath('//ACT')
 act_nodes.each do |act_node|
 
   act_title = act_node.xpath('./TITLE').text
@@ -47,12 +47,18 @@ act_nodes.each do |act_node|
 
       speaker_nodes = speech_node.xpath('./SPEAKER')
       if speaker_nodes.count > 1
-        puts "recording a speech with multiple speakers"
+        speaker_nodes.each do |speaker_node|
 
+          speaker_name = speaker_node.text
+          speaker = Speaker.find_by(name: speaker_name)
+          speech = Speech.new(speaker_id: speaker.id, scene_id: scene.id)
+          speech.save!
+        end
       else
-        speaker_name = speaker_nodes.first.text
-        unless speaker_name == 'All'
+        speaker_node = speaker_nodes.first
+        speaker_name = speaker_node.text
 
+        unless speaker_name == 'All'
           speaker = Speaker.find_by(name: speaker_name)
           speech = Speech.new(speaker_id: speaker.id, scene_id: scene.id)
           speech.save!
