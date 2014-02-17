@@ -45,19 +45,19 @@ act_nodes.each do |act_node|
     speech_nodes = scene_node.xpath('./SPEECH')
     speech_nodes.each do |speech_node|
 
-      speaker_name = speech_node.xpath('SPEAKER').text
+      speaker_nodes = speech_node.xpath('./SPEAKER')
+      if speaker_nodes.count > 1
+        puts "recording a speech with multiple speakers"
 
-      unless speaker_name == 'All'
-        speaker = Speaker.find_by(name: speaker_name)
+      else
+        speaker_name = speaker_nodes.first.text
+        unless speaker_name == 'All'
 
-        if speaker.nil?
-          puts "Speaker name is #{ speaker_name }. There are currently #{ Speech.count } speeches."
-        else
+          speaker = Speaker.find_by(name: speaker_name)
           speech = Speech.new(speaker_id: speaker.id, scene_id: scene.id)
           speech.save!
         end
       end
-
     end
   end
 end
