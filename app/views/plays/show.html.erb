@@ -1,3 +1,22 @@
 <h1><%= @play.title %></h1>
 
-<p>This play has <%= @speakers.count %> characters.</p>
+<table>
+  <thead>
+    <th></th>
+    <th>Number of Lines</th>
+    <th>Longest Speech (# Lines)</th>
+    <th>Number of Scenes</th>
+    <th>Percentage of Scenes</th>
+  </thead>
+  <tbody>
+    <% @speakers.each do |speaker| %>
+      <tr>
+        <td><%= speaker.name %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
