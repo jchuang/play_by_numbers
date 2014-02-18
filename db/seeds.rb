@@ -28,13 +28,22 @@ end
 
 Speech.delete_all
 
-def create_speech(speaker_node, scene)
+def create_speech(speaker_node, speech_node, scene)
   speaker_name = speaker_node.text
   unless speaker_name == 'All'
 
     speaker = Speaker.find_by(name: speaker_name)
     speech = Speech.new(speaker_id: speaker.id, scene_id: scene.id)
     speech.save!
+  end
+end
+
+def create_lines(speech_node, speech)
+  line_nodes = speech_node.xpath('./LINE')
+
+  line_nodes.each do |line_node|
+    line = Line.new(line_text: line_node.text, speech_id: speech.id)
+    line.save!
   end
 end
 
@@ -57,11 +66,11 @@ act_nodes.each do |act_node|
 
       speaker_nodes = speech_node.xpath('./SPEAKER')
       if speaker_nodes.count > 1
-        speaker_nodes.each { |speaker_node| create_speech(speaker_node, scene) }
+        speaker_nodes.each { |speaker_node| create_speech(speaker_node, speech_node, scene) }
 
       else
         speaker_node = speaker_nodes.first
-        create_speech(speaker_node, scene)
+        create_speech(speaker_node, speech_node, scene)
       end
     end
   end
