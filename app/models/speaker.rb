@@ -13,9 +13,13 @@ class Speaker < ActiveRecord::Base
   end
 
   def longest_speech_lines
-    speech_lines = speeches.map { |speech| speech.lines.count }
-    sorted_speech_lines = speech_lines.sort_by { |count| -count }
-    sorted_speech_lines.first
+    if speeches.empty?
+      'N/A'
+    else
+      speech_lines = speeches.map { |speech| speech.lines.count }
+      sorted_speech_lines = speech_lines.sort_by { |count| -count }
+      sorted_speech_lines.first
+    end
   end
 
   def num_scenes
