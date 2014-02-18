@@ -12,5 +12,6 @@ describe Scene do
 
   it { should belong_to :act }
   it { should have_many(:speeches).dependent(:destroy) }
+  it { should have_many(:speakers).through(:speeches) }
 
 end
