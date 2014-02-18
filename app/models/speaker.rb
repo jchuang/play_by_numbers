@@ -5,6 +5,6 @@ class Speaker < ActiveRecord::Base
 
   belongs_to :play, inverse_of: :acts
   has_many :speeches, inverse_of: :speaker, dependent: :destroy
-  has_many :scenes, through: :speeches
+  has_many :scenes, -> { distinct }, through: :speeches
 
 end
