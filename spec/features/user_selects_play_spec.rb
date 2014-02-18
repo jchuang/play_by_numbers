@@ -6,6 +6,9 @@ feature 'user selects play' do
     play = FactoryGirl.create(:play)
     visit plays_path
     expect(page).to have_content play.title
+
+    click_on play.title
+    expect(page).to have_content play.title
   end
 
 end
