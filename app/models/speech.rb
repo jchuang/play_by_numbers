@@ -5,5 +5,6 @@ class Speech < ActiveRecord::Base
 
   belongs_to :speaker, inverse_of: :speeches
   belongs_to :scene, inverse_of: :speeches
+  has_many :lines, inverse_of: :speech, dependent: :destroy
 
 end

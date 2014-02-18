@@ -7,5 +7,6 @@ describe Speech do
 
   it { should belong_to :speaker }
   it { should belong_to :scene }
+  it { should have_many(:lines).dependent(:destroy) }
 
 end

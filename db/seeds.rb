@@ -27,6 +27,7 @@ speakers.each do |speaker|
 end
 
 Speech.delete_all
+Line.delete_all
 
 def create_lines(speech_node, speech)
   line_nodes = speech_node.xpath('./LINE')

@@ -24,4 +24,9 @@ FactoryGirl.define do
     scene
   end
 
+  factory :line do
+    line_text 'hello world'
+    speech
+  end
+
 end
