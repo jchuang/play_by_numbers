@@ -33,8 +33,7 @@ def create_lines(speech_node, speech)
   line_nodes = speech_node.xpath('./LINE')
 
   line_nodes.each do |line_node|
-    line = Line.new(line_text: line_node.text, speech_id: speech.id)
-    line.save!
+    line = Line.create!(line_text: line_node.text, speech_id: speech.id)
   end
 end
 
@@ -43,8 +42,7 @@ def create_speech(speaker_node, speech_node, scene)
   unless speaker_name == 'All'
 
     speaker = Speaker.find_by(name: speaker_name)
-    speech = Speech.new(speaker_id: speaker.id, scene_id: scene.id)
-    speech.save!
+    speech = Speech.create!(speaker_id: speaker.id, scene_id: scene.id)
 
     create_lines(speech_node, speech)
   end
