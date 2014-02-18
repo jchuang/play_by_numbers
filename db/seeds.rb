@@ -28,6 +28,15 @@ end
 
 Speech.delete_all
 
+def create_lines(speech_node, speech)
+  line_nodes = speech_node.xpath('./LINE')
+
+  line_nodes.each do |line_node|
+    line = Line.new(line_text: line_node.text, speech_id: speech.id)
+    line.save!
+  end
+end
+
 def create_speech(speaker_node, speech_node, scene)
   speaker_name = speaker_node.text
   unless speaker_name == 'All'
@@ -35,15 +44,8 @@ def create_speech(speaker_node, speech_node, scene)
     speaker = Speaker.find_by(name: speaker_name)
     speech = Speech.new(speaker_id: speaker.id, scene_id: scene.id)
     speech.save!
-  end
-end
 
-def create_lines(speech_node, speech)
-  line_nodes = speech_node.xpath('./LINE')
-
-  line_nodes.each do |line_node|
-    line = Line.new(line_text: line_node.text, speech_id: speech.id)
-    line.save!
+    create_lines(speech_node, speech)
   end
 end
 
