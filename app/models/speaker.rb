@@ -8,4 +8,20 @@ class Speaker < ActiveRecord::Base
   has_many :scenes, -> { distinct }, through: :speeches
   has_many :lines, through: :speeches
 
+  def num_lines
+    'num_lines'
+  end
+
+  def longest_speech_lines
+    'longest_speech_lines'
+  end
+
+  def num_scenes
+    'num_scenes'
+  end
+
+  def percent_scenes
+    'percent_scenes'
+  end
+
 end

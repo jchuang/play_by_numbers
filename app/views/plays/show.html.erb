@@ -12,10 +12,10 @@
     <% @speakers.each do |speaker| %>
       <tr>
         <td><%= speaker.name %></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><%= speaker.num_lines %></td>
+        <td><%= speaker.longest_speech_lines %></td>
+        <td><%= speaker.num_scenes %></td>
+        <td><%= speaker.percent_scenes %></td>
       </tr>
     <% end %>
   </tbody>
