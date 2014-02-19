@@ -17,8 +17,7 @@ class Speaker < ActiveRecord::Base
       'N/A'
     else
       speech_lines = speeches.map { |speech| speech.lines.count }
-      sorted_speech_lines = speech_lines.sort_by { |count| -count }
-      sorted_speech_lines.first
+      speech_lines.max
     end
   end
 
