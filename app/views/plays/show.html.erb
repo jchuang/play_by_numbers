@@ -3,10 +3,10 @@
 <table>
   <thead>
     <th></th>
-    <th>Number of Lines</th>
-    <th>Longest Speech (# Lines)</th>
-    <th>Number of Scenes</th>
-    <th>Percentage of Scenes</th>
+    <th><%= link_to 'Number of Lines', sort: 'num_lines' %></th>
+    <th><%= link_to 'Longest Speech', sort: 'longest_speech_lines' %></th>
+    <th><%= link_to 'Number of Scenes', sort: 'num_scenes' %></th>
+    <th><%= link_to 'Percentage of Scenes', sort: 'num_scenes' %></th>
   </thead>
   <tbody>
     <% @speakers.each do |speaker| %>
