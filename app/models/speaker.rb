@@ -9,20 +9,20 @@ class Speaker < ActiveRecord::Base
   has_many :lines, through: :speeches
 
   def num_lines
-    lines.count
+    @num_lines ||= lines.count
   end
 
   def longest_speech_lines
     if speeches.empty?
       'N/A'
     else
-      speech_lines = speeches.map { |speech| speech.lines.count }
+      speech_lines = speeches.map { |speech| speech.lines_count }
       speech_lines.max
     end
   end
 
   def num_scenes
-    scenes.count
+    @num_scenes ||= scenes.count
   end
 
   # This should be handled elsewhere.  A play knows its total number of scenes.
