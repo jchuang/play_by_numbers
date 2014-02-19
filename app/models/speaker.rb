@@ -13,12 +13,8 @@ class Speaker < ActiveRecord::Base
   end
 
   def longest_speech_lines
-    if speeches.empty?
-      'N/A'
-    else
-      speech_lines = speeches.map { |speech| speech.lines_count }
-      speech_lines.max
-    end
+    @speech ||= longest_speech
+    @speech.nil? ? 'N/A' : @speech.lines_count
   end
 
   def num_scenes
@@ -29,6 +25,16 @@ class Speaker < ActiveRecord::Base
   # Rails is using a cached value for num_scenes.
   def percent_scenes
     ((num_scenes * 100.0) / 18).round
+  end
+
+  private
+
+  def longest_speech
+    if speeches.empty?
+      nil
+    else
+      speeches.order(lines_count: :desc).limit(1).first
+    end
   end
 
 end
