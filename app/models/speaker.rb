@@ -14,11 +14,23 @@ class Speaker < ActiveRecord::Base
 
   def longest_speech_lines
     @speech ||= longest_speech
-    @speech.nil? ? 'N/A' : @speech.lines_count
+    @speech.nil? ? 0 : @speech.lines_count
   end
 
   def num_scenes
     @num_scenes ||= scenes.count
+  end
+
+  def self.sort_speakers(params)
+    if params[:sort] == 'num_lines'
+      Speaker.all.sort_by { |speaker| -speaker.num_lines }
+    elsif params[:sort] == 'longest_speech_lines'
+      Speaker.all.sort_by { |speaker| -speaker.longest_speech_lines }
+    elsif params[:sort] == 'num_scenes'
+      Speaker.all.sort_by { |speaker| -speaker.num_scenes }
+    else
+      Speaker.all
+    end
   end
 
   private
