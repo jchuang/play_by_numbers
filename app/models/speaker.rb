@@ -21,12 +21,6 @@ class Speaker < ActiveRecord::Base
     @num_scenes ||= scenes.count
   end
 
-  # This should be handled elsewhere.  A play knows its total number of scenes.
-  # Rails is using a cached value for num_scenes.
-  def percent_scenes
-    ((num_scenes * 100.0) / 18).round
-  end
-
   private
 
   def longest_speech
