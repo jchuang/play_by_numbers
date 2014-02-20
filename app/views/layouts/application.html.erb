@@ -12,8 +12,13 @@
   </head>
 
   <body>
-
-    <%= yield %>
+    <div id="page-content">
+      <div class="row">
+        <div class="small-12 columns">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
     <%= javascript_include_tag "application" %>
   </body>
 </html>

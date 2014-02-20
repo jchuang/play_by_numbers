@@ -13,3 +13,16 @@
 
  *= require_tree .
  */
+
+#page-content {
+  padding-top: 2rem;
+}
+
+#play-list {
+  padding-top: 1rem;
+}
+
+#speakers {
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+}
