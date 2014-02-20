@@ -1,5 +1,7 @@
 PlayByNumbers::Application.routes.draw do
 
+  root 'plays#index'
+
   resources :plays, only: [:index, :show]
 
   # The priority is based upon order of creation: first created -> highest priority.
