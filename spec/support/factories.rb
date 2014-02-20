@@ -10,7 +10,7 @@ FactoryGirl.define do
   end
 
   factory :speaker do
-    name 'Romeo'
+    sequence(:name) { |n| "Speaker #{n}" }
     play
   end
 
