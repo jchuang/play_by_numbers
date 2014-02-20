@@ -23,18 +23,19 @@ class Speaker < ActiveRecord::Base
 
   def self.sort_speakers(params)
     speakers = Speaker.where(play_id: params[:id])
+
+    params[:direction] ||= 'desc'
     order = (params[:direction] == 'asc') ? 1 : -1
 
-    if params[:sort] == 'num_lines'
-      speakers.sort_by { |speaker| order * speaker.num_lines }
-    elsif params[:sort] == 'longest_speech'
+    if params[:sort] == 'longest_speech'
       speakers.sort_by { |speaker| order * speaker.longest_speech_lines }
     elsif params[:sort] == 'num_scenes'
       speakers.sort_by { |speaker| order * speaker.num_scenes }
     elsif params[:sort] == 'percent_scenes'
       speakers.sort_by { |speaker| order * speaker.num_scenes }
     else
-      speakers
+      params[:sort] ||= 'num_lines'
+      speakers.sort_by { |speaker| order * speaker.num_lines }
     end
   end
 
