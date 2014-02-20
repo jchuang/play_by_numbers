@@ -1,0 +1,20 @@
+<table>
+  <thead>
+    <th></th>
+    <th><%= column_sort 'Number of Lines', 'num_lines' %></th>
+    <th><%= column_sort 'Longest Speech', 'longest_speech' %></th>
+    <th><%= column_sort 'Number of Scenes', 'num_scenes' %></th>
+    <th><%= column_sort 'Percentage of Scenes', 'percent_scenes' %></th>
+  </thead>
+  <tbody>
+    <% @speakers.each do |speaker| %>
+      <tr>
+        <td><%= speaker.name %></td>
+        <td><%= speaker.num_lines %></td>
+        <td><%= speaker.longest_speech_lines %></td>
+        <td><%= speaker.num_scenes %></td>
+        <td><%= ((speaker.num_scenes * 100.0) / @total_scenes).round %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
