@@ -27,7 +27,7 @@ class Speaker < ActiveRecord::Base
 
     if params[:sort] == 'num_lines'
       speakers.sort_by { |speaker| order * speaker.num_lines }
-    elsif params[:sort] == 'longest_speech_lines'
+    elsif params[:sort] == 'longest_speech'
       speakers.sort_by { |speaker| order * speaker.longest_speech_lines }
     elsif params[:sort] == 'num_scenes'
       speakers.sort_by { |speaker| order * speaker.num_scenes }
