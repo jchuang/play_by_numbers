@@ -23,6 +23,6 @@ $(document).ready(function() {
 
   $('#speakers').on('click', 'th a', function(event) {
     event.preventDefault();
-    alert('table header was clicked!');
+    $.getScript(this.href);
   });
 });
