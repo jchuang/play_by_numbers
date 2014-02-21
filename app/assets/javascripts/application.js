@@ -16,4 +16,13 @@
 //= require turbolinks
 //= require_tree .
 
-$(function(){ $(document).foundation(); });
+// $(function(){ $(document).foundation(); });
+
+$(document).ready(function() {
+  $(document).foundation();
+
+  $('#speakers').on('click', 'th a', function(event) {
+    event.preventDefault();
+    alert('table header was clicked!');
+  });
+});
