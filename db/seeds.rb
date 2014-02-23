@@ -7,7 +7,6 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 require 'nokogiri'
-require 'pry'
 
 document = Nokogiri::XML(File.open(Rails.root + 'db/data/julius_caesar.xml'))
 
